@@ -1,0 +1,47 @@
+<div class="col-md-6  offset-md-3">
+  <h3 class="text-center">Registro de Empleado</h3>
+  <form (ngSubmit)="onSubmit()" #empleadoForm = "ngForm">
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="empleado.nombre" name="nombre"
+          required="true" placeholder="Escriba aquí su nombre" minlength="4" maxlength="14"  #nombre = "ngModel">
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf = "nombre.errors?.required">
+              Digite su nombre por favor
+            </div>
+            <div *ngIf = "nombre.errors?.minlength">
+              El nombre debe contener mínimo 4 caracteres
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label>Apellido:</label>
+        <input type="text" class="form-control" id="apellido" [(ngModel)]="empleado.apellido" name="apellido"
+        required="true" placeholder="Escriba aquí su apellido" minlength="4" maxlength="14"  #apellido = "ngModel">
+        <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+          <div *ngIf = "apellido.errors?.required">
+            Digite su apellido por favor
+          </div>
+          <div *ngIf = "apellido.errors?.minlength">
+            El apellido debe contener mínimo 4 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="empleado.email" name="email"
+        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+        required="true" placeholder="Escriba aquí su email" #email = "ngModel">
+        <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div *ngIf = "email.errors?.required">
+            Digite su email por favor
+          </div>
+          <div *ngIf = "email.errors?.pattern">
+            Digite su email con este formato: 'user&#64;correo.com'
+          </div>
+        </div>
+      </div>
+    <br/>
+    <button class="btn btn-success" [disabled]="!empleadoForm.form.valid">Guardar</button>
+  </form>
+</div>
